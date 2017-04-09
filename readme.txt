@@ -1,1 +1,2 @@
-阿萨德卡士大夫水电费
+git remote add origin https://github.com/dalewa/my_way.git
+git push -u origin master
