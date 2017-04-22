@@ -1,7 +1,7 @@
 git init xxx
 
 git add xxx (汉语也可不用引号)
-git commit -u 'message'
+git commit -m 'message'
 
 git remote add origin https://github.com/dalewa/my_way.git
 git push -u origin master
