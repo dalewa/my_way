@@ -12,7 +12,10 @@ try:
     response = urllib2.urlopen(request)
     # print response.read()
     content = response.read().decode('utf-8')
-    pattern=re.compile('<div class="author clearfix">.*?<h2>(.*?)</h2>.*?<div class="content">(.*?)</div>.*?<div class="stats".*?i class="number">(.*?)</i>(.*?)</span>.*?<span class="dash".*?i class="number">(.*?)</i>(.*?)</a>',re.S)
+    pattern=re.compile('<div class="author clearfix">.*?<h2>(.*?)</h2>.*?'+
+                       '<div class="content">(.*?)</div>.*?<div class="stats".*?' +
+                       'i class="number">(.*?)</i>(.*?)</span>.*?' +
+                       '<span class="dash".*?i class="number">(.*?)</i>(.*?)</a>',re.S)
     items = re.findall(pattern, content)
     for item in items:
         haveImg = re.search("img", item[3])
