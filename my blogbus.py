@@ -13,12 +13,14 @@ for i in page:
         response = urllib2.urlopen(request)
         # print response.read()
         content = response.read().decode('utf-8')
-        pattern=re.compile('<div class="postHeader">.*?<h2>(.*?)</a>.*?'+
+        pattern=re.compile('h2.*?.html">(.*?)</a>.*?'+
                            '<h5 class="date">(.*?)</h5>.*?' +
                            '<div class="postBody">(.*?)</div> *?',re.S)
         items = re.findall(pattern, content)
         for item in items:
-            print item[0], item[1], item[2]
+            li =  item[0].strip() + '\t' + item[1].strip() +  '\n' +  item[2].strip() +  '\n'
+            print li
+        
 
     except urllib2.URLError, e:
         if hasattr(e, 'code'):
