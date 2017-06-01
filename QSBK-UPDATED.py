@@ -2,7 +2,7 @@ import requests
 from lxml import etree
 
 data = ''
-for i in range(3):
+for i in range(8):
     url = 'http://www.qiushibaike.com/8hr/page/%d/' % i
 
     req = requests.get(url)
@@ -13,7 +13,7 @@ for i in range(3):
 
     for div in result:
         author = div.xpath('.//h2/text()')
-        data += ('\n' + author[0] + ':\t')
+        data += (author[0] + '\t')
         if author[0] == '匿名用户':
             gender = '匿'
             age = '匿'
@@ -28,15 +28,19 @@ for i in range(3):
                 gender = '女'
             age = div.xpath('.//div[@class = "articleGender womenIcon"]/text()|'
                             './/div[@class = "articleGender manIcon"]/text()')
-        data += (gender + '，')
-        data += (age[0] + '\n')
+        data += (gender + '\t')
+        data += (age[0] + '\t')
 
         content = div.xpath('.//div[@class = "content"]/span/text()')
         haha = div.xpath('.//span[@class = "stats-vote"]/i/text()')
-        comment = div.xpath('.//span[@class = "stats-comments"]/a/i/text()')
+        yyy = div.xpath('.//span[@class = "stats-comments"]/a/i/text()')
+        if yyy == []:
+            comment = 0
+        else:
+            comment = yyy[0]
         data += (content[0] + '\t')
-        data += ('好笑：' + haha[0] + '，')
-        data += ('评论：' + comment[0] + '\n')
+        data += (haha[0] + '\t')
+        data += (str(comment) + '\n')
 
-with open('QSBKnew.txt', 'w') as f:
+with open('QSBKnew.txt', 'w', errors = 'ignore') as f:
     f.write(data)
