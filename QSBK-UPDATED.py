@@ -44,3 +44,5 @@ for i in range(8):
 
 with open('QSBKnew.txt', 'w', errors = 'ignore') as f:
     f.write(data)
+
+    
