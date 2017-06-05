@@ -1,0 +1,31 @@
+import requests
+import urllib.request
+from bs4 import BeautifulSoup
+import re
+import time
+import random
+
+header = {'User-Agent': 'Mozilla / 12.0'}
+
+url = 'https://movie.douban.com/people/dale0421/collect'
+req = requests.get(url)
+html = req.text
+soup = BeautifulSoup(html, 'html.parser')
+title = soup.find_all('em')
+date = soup.find_all('span', class_="date")
+rating = re.compile('rating\d-t')
+star = soup.find_all('span', class_=rating)
+tag = soup.find_all('span', class_="tags")
+
+for i in range(0,15):
+    print(title[i].get_text(), date[i].get_text(),
+          star[i].get("class")[0].replace('rating', '').replace('-t', ''),
+          tag[i].get_text().replace('标签:', ''))
+    time.sleep(random.randint(1,3))
+
+
+
+
+
+
+
